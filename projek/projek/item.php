@@ -6,9 +6,9 @@ if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_sql = "DELETE FROM items WHERE id = $delete_id";
     if ($conn->query($delete_sql) === TRUE) {
-        echo "Item berhasil dihapus.";
+        echo "<p class='message success'>Item berhasil dihapus.</p>";
     } else {
-        echo "Error: " . $conn->error;
+        echo "<p class='message error'>Error: " . $conn->error . "</p>";
     }
 }
 
@@ -45,69 +45,173 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($image_size <= 5000000) {  // Maksimal 5MB
             // Pindahkan file dari direktori sementara ke folder uploads
             if (move_uploaded_file($image_tmp_name, $image_path)) {
-          
                 $sql = "INSERT INTO items (name, category_id, item_condition, purchase_date, price, image, room_id, quantity)
                         VALUES ('$name', '$category_id', '$item_condition', '$purchase_date', '$price', '$image_name', '$room_id', '$quantity')";
                 
                 if ($conn->query($sql) === TRUE) {
-                    echo "Data berhasil ditambahkan";
+                    echo "<p class='message success'>Data berhasil ditambahkan.</p>";
                 } else {
-                    echo "ERROR: " . $sql . "<br>" . $conn->error;
+                    echo "<p class='message error'>ERROR: " . $sql . "<br>" . $conn->error . "</p>";
                 }
             } else {
-                echo "Gagal meng-upload gambar.";
+                echo "<p class='message error'>Gagal meng-upload gambar.</p>";
             }
         } else {
-            echo "Ukuran file terlalu besar. Maksimal 5MB.";
+            echo "<p class='message error'>Ukuran file terlalu besar. Maksimal 5MB.</p>";
         }
     } else {
-        echo "Terjadi kesalahan saat meng-upload gambar.";
+        echo "<p class='message error'>Terjadi kesalahan saat meng-upload gambar.</p>";
     }
 }
+
+$sql_items = "SELECT items.id, items.name, items.item_condition, items.purchase_date, items.price, items.quantity, items.image, categories.name AS category_name, rooms.name AS room_name
+              FROM items
+              JOIN categories ON items.category_id = categories.id
+              JOIN rooms ON items.room_id = rooms.id";
+$result_items = $conn->query($sql_items);
 ?>
 
-<!-- Form untuk menambahkan barang -->
-<form method="post" enctype="multipart/form-data"> <!-- enctype="multipart/form-data" agar bisa upload file -->
-    <input type="text" name="name" placeholder="Nama Barang" required><br>
-    <select name="category_id" required>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manajemen Barang</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f7f6;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 20px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #469ced;
+    }
+    form {
+      margin: 20px 0;
+      text-align: center;
+    }
+    form input[type="text"],
+    form input[type="date"],
+    form input[type="number"],
+    form select,
+    form input[type="file"] {
+      width: calc(50% - 20px);
+      padding: 10px;
+      margin: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    form button {
+      background-color: #469ced;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin: 10px;
+    }
+    form button:hover {
+      background-color: #357ab8;
+    }
+    .message {
+      text-align: center;
+      font-weight: bold;
+      padding: 10px;
+      margin: 10px;
+    }
+    .success {
+      color: #2e7d32;
+    }
+    .error {
+      color: #d32f2f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    table th,
+    table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+    table th {
+      background-color: #469ced;
+      color: #fff;
+    }
+    table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+    table a {
+      color: #469ced;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    table a:hover {
+      text-decoration: underline;
+    }
+    img {
+      max-width: 100px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Tambah Barang</h1>
+    <!-- Form untuk menambahkan barang -->
+    <form method="post" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Nama Barang" required><br>
+      <select name="category_id" required>
         <option value="">Pilih Kategori</option>
         <?php 
         // Mengambil kategori dari database untuk ditampilkan dalam dropdown
         $sql_categories = "SELECT * FROM categories";
         $result = $conn->query($sql_categories);
         while ($row = $result->fetch_assoc()) { ?>
-            <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+          <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
         <?php } ?>
-    </select><br>
-
-    <!-- Dropdown untuk memilih Ruangan -->
-    <select name="room_id" required>
+      </select><br>
+      <!-- Dropdown untuk memilih Ruangan -->
+      <select name="room_id" required>
         <option value="">Pilih Ruangan</option>
         <?php
         // Mengambil data ruangan dari database untuk ditampilkan dalam dropdown
         $sql_rooms = "SELECT * FROM rooms";
         $result_rooms = $conn->query($sql_rooms);
         while ($row = $result_rooms->fetch_assoc()) { ?>
-            <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
+          <option value="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></option>
         <?php } ?>
-    </select><br>
-
-    <select name="item_condition" required>
+      </select><br>
+      <select name="item_condition" required>
         <option value="baik">Baik</option>
         <option value="rusak ringan">Rusak Ringan</option>
         <option value="rusak berat">Rusak Berat</option>
-    </select><br>
-    <input type="date" name="purchase_date" required><br>
-    <input type="number" name="price" step="0.01" placeholder="Harga" required><br>
-    <input type="number" name="quantity" placeholder="Jumlah Barang" required><br>
-    <input type="file" name="image" required><br> <!-- Input untuk upload file -->
-    <button type="submit">Submit</button>
-</form>
+      </select><br>
+      <input type="date" name="purchase_date" required><br>
+      <input type="number" name="price" step="0.01" placeholder="Harga" required><br>
+      <input type="number" name="quantity" placeholder="Jumlah Barang" required><br>
+      <input type="file" name="image" required><br>
+      <button type="submit">Submit</button>
+    </form>
 
-<!-- Menampilkan daftar barang -->
-<h2>Daftar Barang</h2>
-<table border="1">
-    <tr>
+    <!-- Menampilkan daftar barang -->
+    <h2>Daftar Barang</h2>
+    <table border="1">
+      <tr>
         <th>Nama</th>
         <th>Kategori</th>
         <th>Kondisi</th>
@@ -117,18 +221,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <th>Ruangan</th>
         <th>Gambar</th>
         <th>Aksi</th>
-    </tr>
-
-    <?php
-    // Menampilkan data barang dari database
-    $sql_items = "SELECT items.id, items.name, items.item_condition, items.purchase_date, items.price, items.quantity, items.image, categories.name AS category_name, rooms.name AS room_name
-                  FROM items
-                  JOIN categories ON items.category_id = categories.id
-                  JOIN rooms ON items.room_id = rooms.id";
-    $result_items = $conn->query($sql_items);
-    while ($row = $result_items->fetch_assoc()) {
-    ?>
-    <tr>
+      </tr>
+      <?php
+      while ($row = $result_items->fetch_assoc()) {
+      ?>
+      <tr>
         <td><?php echo $row['name']; ?></td>
         <td><?php echo $row['category_name']; ?></td>
         <td><?php echo $row['item_condition']; ?></td>
@@ -136,11 +233,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <td><?php echo number_format($row['price'], 2); ?></td>
         <td><?php echo $row['quantity']; ?></td>
         <td><?php echo $row['room_name']; ?></td>
-        <td><img src="uploads/<?php echo $row['image']; ?>" width="100"></td>
+        <td><img src="uploads/<?php echo $row['image']; ?>" alt="Gambar Barang"></td>
         <td>
-            <a href="edit_item.php?id=<?php echo $row['id']; ?>">Edit</a> | 
-            <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?');">Hapus</a>
+          <a href="edit_item.php?id=<?php echo $row['id']; ?>">Edit</a> | 
+          <a href="?delete_id=<?php echo $row['id']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus item ini?');">Hapus</a>
         </td>
-    </tr>
-    <?php } ?>
-</table>
+      </tr>
+      <?php } ?>
+    </table>
+  </div>
+</body>
+</html>

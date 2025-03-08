@@ -63,7 +63,6 @@ ob_start();
         </tr>
 
         <?php
-        // Query untuk mengambil data item di ruangan tertentu
         $sql_items = "SELECT items.name, categories.name AS category, items.item_condition, 
                       items.purchase_date, items.price, items.quantity 
                       FROM items 
@@ -105,7 +104,7 @@ ob_start();
 </html>
 
 <?php
-// Ambil konten yang sudah di-buffer
+
 $content = ob_get_clean();
 echo $content;
 exit();

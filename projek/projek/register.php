@@ -3,25 +3,34 @@ include "config.php";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT); // Hash password
+    $password = $_POST['password'];
 
 
-    $check_user = $conn->prepare("SELECT id FROM users WHERE username = ?");
-    $check_user->bind_param("s", $username);
-    $check_user->execute();
-    $check_user->store_result();
-
-    if ($check_user->num_rows > 0) {
-        echo "Username sudah digunakan!";
+    if (strlen($password) < 8) {
+        echo "Password harus terdiri dari minimal 8 karakter!";
     } else {
-       
-        $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
-        $stmt->bind_param("ss", $username, $password);
+        
+        $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-        if ($stmt->execute()) {
-            echo "Registrasi berhasil! <a href='login.php'>Login</a>";
+        
+        $check_user = $conn->prepare("SELECT id FROM users WHERE username = ?");
+        $check_user->bind_param("s", $username);
+        $check_user->execute();
+        $check_user->store_result();
+
+    
+        if ($check_user->num_rows > 0) {
+            echo "Username sudah digunakan!";
         } else {
-            echo "Terjadi kesalahan!";
+       
+            $stmt = $conn->prepare("INSERT INTO users (username, password) VALUES (?, ?)");
+            $stmt->bind_param("ss", $username, $hashed_password);
+
+            if ($stmt->execute()) {
+                echo "Registrasi berhasil! <a href='login.php'>Login</a>";
+            } else {
+                echo "Terjadi kesalahan!";
+            }
         }
     }
 }
