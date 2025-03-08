@@ -8,6 +8,7 @@
 <body>
     <li> <a href="register.php">tambahkan user</a></li>
     <li>    <a href="logout.php">logout</a></li>
+    <li><a href="ubah.php">ubah username/password</a></li>
    
 
     
