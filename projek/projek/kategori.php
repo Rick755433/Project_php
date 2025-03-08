@@ -40,7 +40,7 @@ $result_categories = $conn->query($sql_categories);
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #e7f0fb;
+      background: #f4f7f6;
       margin: 0;
       padding: 20px;
     }

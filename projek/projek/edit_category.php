@@ -43,7 +43,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color: #e7f0fb;
+      background: #f4f7f6;
       margin: 0;
       padding: 20px;
     }
@@ -118,7 +118,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
       <button type="submit">Update Kategori</button>
     </form>
     <div class="back-link">
-      <a href="kategoris.php">Kembali ke Daftar Kategori</a>
+      <a href="kategori.php">Kembali ke Daftar Kategori</a>
     </div>
   </div>
 </body>

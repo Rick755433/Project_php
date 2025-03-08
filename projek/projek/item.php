@@ -64,10 +64,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-$sql_items = "SELECT items.id, items.name, items.item_condition, items.purchase_date, items.price, items.quantity, items.image, categories.name AS category_name, rooms.name AS room_name
+// Menangani pencarian barang
+$search = "";
+if (isset($_GET['search'])) {
+    $search = $_GET['search'];
+}
+
+$sql_items = "SELECT items.id, items.name, items.item_condition, items.purchase_date, items.price, items.quantity, items.image, 
+                     categories.name AS category_name, rooms.name AS room_name
               FROM items
               JOIN categories ON items.category_id = categories.id
               JOIN rooms ON items.room_id = rooms.id";
+if ($search != "") {
+    $sql_items .= " WHERE items.name LIKE '%" . $conn->real_escape_string($search) . "%'";
+}
 $result_items = $conn->query($sql_items);
 ?>
 
@@ -167,6 +177,30 @@ $result_items = $conn->query($sql_items);
       max-width: 100px;
       border-radius: 4px;
     }
+    /* Style untuk form pencarian */
+    .search-form {
+      text-align: center;
+      margin: 20px 0;
+    }
+    .search-form input[type="text"] {
+      width: calc(50% - 20px);
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .search-form button {
+      background-color: #469ced;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      margin-left: 10px;
+    }
+    .search-form button:hover {
+      background-color: #357ab8;
+    }
   </style>
 </head>
 <body>
@@ -207,7 +241,13 @@ $result_items = $conn->query($sql_items);
       <input type="file" name="image" required><br>
       <button type="submit">Submit</button>
     </form>
-
+    
+    <!-- Form pencarian -->
+    <form class="search-form" method="get">
+      <input type="text" name="search" placeholder="Cari barang..." value="<?php echo isset($_GET['search']) ? htmlspecialchars($_GET['search']) : ''; ?>">
+      <button type="submit">Cari</button>
+    </form>
+    
     <!-- Menampilkan daftar barang -->
     <h2>Daftar Barang</h2>
     <table border="1">
