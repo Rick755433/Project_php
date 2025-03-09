@@ -2,19 +2,61 @@
 session_start();
 include "config.php";
 
-// Ambil username berdasarkan user_id dari session
-if (isset($_SESSION['user_id'])) {
-  $user_id = $_SESSION['user_id'];
-  $query = "SELECT username FROM users WHERE id = $user_id";
-  $result = $conn->query($query);
-  if($result && $result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $username = $row['username'];
-  } else {
-    $username = "User";
-  }
-} else {
-  $username = "Guest";
+// Cek apakah user sudah login
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
+
+$user_id = $_SESSION['user_id'];
+
+// Ambil data user
+$query = "SELECT username, profile FROM users WHERE id = ?";
+$stmt = $conn->prepare($query);
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
+$stmt->store_result();
+
+if ($stmt->num_rows > 0) {
+    $stmt->bind_result($username, $profile);
+    $stmt->fetch();
+
+    // Jika profile kosong, gunakan default
+    if (empty($profile)) {
+        $profile = "profile/user-profile.png";
+    }
+}
+
+// Proses perubahan foto profil
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
+        $file_name = basename($_FILES['profile_pic']['name']);
+        $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
+        $allowed_exts = ["jpg", "jpeg", "png", "gif"];
+
+        if (in_array($file_ext, $allowed_exts)) {
+            $new_file_name = "profile_" . $user_id . "." . $file_ext;
+            $target_file = "profile/" . $new_file_name;
+
+            if (move_uploaded_file($_FILES['profile_pic']['tmp_name'], $target_file)) {
+                // Update profile di database
+                $update = $conn->prepare("UPDATE users SET profile = ? WHERE id = ?");
+                $update->bind_param("si", $target_file, $user_id);
+                if ($update->execute()) {
+                    echo "Foto profil berhasil diperbarui!";
+                    $profile = $target_file; // Perbarui tampilan profil langsung
+                } else {
+                    echo "Gagal memperbarui database.";
+                }
+            } else {
+                echo "Gagal mengunggah file.";
+            }
+        } else {
+            echo "Format gambar harus JPG, JPEG, PNG, atau GIF!";
+        }
+    } else {
+        echo "Tidak ada file yang dipilih.";
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -37,21 +79,26 @@ if (isset($_SESSION['user_id'])) {
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       padding: 20px;
-    }
-    .container h2 {
       text-align: center;
-      color: #469ced;
-      margin-bottom: 20px;
     }
-    .welcome {
-      text-align: center;
-      margin-bottom: 20px;
-      font-size: 1.2em;
+    .profile-img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #469ced;
+      margin-bottom: 15px;
+    }
+    .settings-form {
+      margin-top: 15px;
+    }
+    .settings-form input {
+      margin-bottom: 10px;
     }
     .settings-list {
       list-style: none;
       padding: 0;
-      margin: 0;
+      margin-top: 20px;
     }
     .settings-list li {
       border-bottom: 1px solid #ddd;
@@ -61,7 +108,7 @@ if (isset($_SESSION['user_id'])) {
     }
     .settings-list a {
       display: block;
-      padding: 15px 20px;
+      padding: 15px;
       text-decoration: none;
       color: #333;
       transition: background 0.3s ease;
@@ -74,7 +121,15 @@ if (isset($_SESSION['user_id'])) {
 <body>
   <div class="container">
     <h2>Pengaturan Akun</h2>
-    <p class="welcome">Selamat datang, <?php echo htmlspecialchars($username); ?>!</p>
+    <img src="<?php echo htmlspecialchars($profile); ?>" alt="Profile Picture" class="profile-img">
+    <p>Selamat datang, <?php echo htmlspecialchars($username); ?>!</p>
+
+    <form method="POST" enctype="multipart/form-data" class="settings-form">
+      <label for="profile_pic">Ubah Foto Profil:</label>
+      <input type="file" name="profile_pic" accept="image/*">
+      <button type="submit">Upload</button>
+    </form>
+
     <ul class="settings-list">
       <li><a href="register.php">Tambahkan User</a></li>
       <li><a href="ubah.php">Ubah Username/Password</a></li>
