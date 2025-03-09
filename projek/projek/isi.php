@@ -187,6 +187,24 @@ a {
 a:hover {
     text-decoration: underline;
 }
+
+  .user-list {
+    list-style: none;
+    padding: 0;
+  }
+  .user-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
 </style>
 <body>
   <header class="header">
@@ -216,23 +234,21 @@ a:hover {
     <div class="chart-card">
     <h2>Daftar Pengguna</h2>
     <ul class="user-list">
-      <?php
-      if ($result_users->num_rows > 0) {
-        while ($row = $result_users->fetch_assoc()) {
-          echo "<li class='user-item'>";
-          echo "<strong>" . htmlspecialchars($row['username']) . "</strong> - ";
-          if ($row['status'] == "Online") {
-            echo "<span class='status-online'>Online</span>";
-          } else {
-            echo "<span class='status-offline'>Offline</span> (Terakhir online: " . $row['last_online'] . ")";
-          }
-          echo "</li>";
-        }
-      } else {
-        echo "<li>Tidak ada pengguna yang terdaftar.</li>";
-      }
-      ?>
-    </ul>
+  <?php
+  if ($result_users->num_rows > 0) {
+    while ($row = $result_users->fetch_assoc()) {
+      echo "<li class='user-item'>";
+  
+  
+      echo "<strong>" . htmlspecialchars($row['username']) . "</strong>  ";
+   
+      echo "</li>";
+    }
+  } else {
+    echo "<li>Tidak ada pengguna yang terdaftar.</li>";
+  }
+  ?>
+</ul>
       
  
     </div>

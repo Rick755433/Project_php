@@ -2,7 +2,7 @@
 session_start();
 include "config.php";
 
-// Cek apakah user sudah login
+
 if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit();
@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id'];
 
-// Ambil data user
+
 $query = "SELECT username, profile FROM users WHERE id = ?";
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
@@ -21,13 +21,13 @@ if ($stmt->num_rows > 0) {
     $stmt->bind_result($username, $profile);
     $stmt->fetch();
 
-    // Jika profile kosong, gunakan default
+    
     if (empty($profile)) {
         $profile = "profile/user-profile.png";
     }
 }
 
-// Proses perubahan foto profil
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_FILES['profile_pic']) && $_FILES['profile_pic']['error'] == 0) {
         $file_name = basename($_FILES['profile_pic']['name']);
@@ -115,6 +115,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     .settings-list a:hover {
       background: #f0f8ff;
+    }
+    button{
+      padding: 7px;
+      font-size: 12px;
+      background-color: #469ced;
+      color: white;
+      border: none;
+      border-radius: 7px;
     }
   </style>
 </head>

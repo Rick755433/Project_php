@@ -80,7 +80,50 @@ $result_target_rooms = $conn->query($sql_target_rooms);
   <title>Detail Ruangan</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Styling tambahan jika diperlukan */
+    
+    input{
+      padding: 7px;
+      border-radius: 10px;
+      border: 1px solid #469ced ;
+
+    }
+    button{
+      padding: 7px;
+      margin: 5px;
+      background-color: #469ced;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+    .btndowload a{
+      padding: 7px;
+      border-radius: 3px;
+      background: #469ced;
+      color: white;
+    }
+    .btndowload a:hover{
+      padding: 9;
+      background-color: white;
+      color: #469ced;
+    }
+    @media only screen and (max-width: 600px) {
+      table th,
+table td {
+    padding: 7px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+.table-section {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+}
+
+
+ 
+}
+  
   </style>
 </head>
 <body>
@@ -157,8 +200,8 @@ $result_target_rooms = $conn->query($sql_target_rooms);
       <button type="submit" name="delete_selected" onclick="return confirm('Apakah Anda yakin ingin menghapus item terpilih?');">Hapus Item Terpilih</button>
     </form>
     <br>
-    <!-- Link Download Laporan -->
-    <div style="text-align: center; margin-top:20px;">
+    
+    <div class="btndowload" style="text-align: center; margin-top:20px;">
       <a href="download_report.php?id=<?php echo $room_id; ?>&q=<?php echo urlencode($q); ?>" class="download-btn">Download Laporan</a>
     </div>
     <br>
