@@ -1,8 +1,10 @@
 <?php
+include "config.php";
 session_start();
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
+if (isset($_SESSION['user_id'])) {
+  $user_id = $_SESSION['user_id'];
+  $update_last_online = "UPDATE users SET last_online = NOW() WHERE id = '$user_id'";
+  $conn->query($update_last_online);
 }
 ?>
 <!DOCTYPE html>
@@ -192,6 +194,7 @@ if (!isset($_SESSION['user_id'])) {
       document.getElementById('content-frame').src = 'user.php';
   });
 </script>
+
 
 </body>
 </html>

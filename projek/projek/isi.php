@@ -80,6 +80,14 @@ if ($result_chart5->num_rows > 0) {
     $chart5_data[] = $row['total_value'] ? $row['total_value'] : 0;
   }
 }
+
+
+$sql_users = "SELECT username, last_online, 
+              IF(TIMESTAMPDIFF(MINUTE, last_online, NOW()) < 5, 'Online', 'Offline') AS status 
+              FROM users 
+              ORDER BY last_online DESC 
+              LIMIT 5";
+$result_users = $conn->query($sql_users);
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -204,6 +212,29 @@ a:hover {
     <div class="chart-card">
       <canvas id="chart5"></canvas>
       <div class="chart-title">Total Harga Inventaris per Kategori</div>
+    </div>
+    <div class="chart-card">
+    <h2>Daftar Pengguna</h2>
+    <ul class="user-list">
+      <?php
+      if ($result_users->num_rows > 0) {
+        while ($row = $result_users->fetch_assoc()) {
+          echo "<li class='user-item'>";
+          echo "<strong>" . htmlspecialchars($row['username']) . "</strong> - ";
+          if ($row['status'] == "Online") {
+            echo "<span class='status-online'>Online</span>";
+          } else {
+            echo "<span class='status-offline'>Offline</span> (Terakhir online: " . $row['last_online'] . ")";
+          }
+          echo "</li>";
+        }
+      } else {
+        echo "<li>Tidak ada pengguna yang terdaftar.</li>";
+      }
+      ?>
+    </ul>
+      
+ 
     </div>
   </section>
   <section class="table-section">

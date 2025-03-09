@@ -44,18 +44,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $update->bind_param("si", $target_file, $user_id);
                 if ($update->execute()) {
                     echo "Foto profil berhasil diperbarui!";
-                    $profile = $target_file; // Perbarui tampilan profil langsung
+                    $profile = $target_file; 
                 } else {
-                    echo "Gagal memperbarui database.";
+                 
                 }
             } else {
-                echo "Gagal mengunggah file.";
+             
             }
         } else {
-            echo "Format gambar harus JPG, JPEG, PNG, atau GIF!";
+            
         }
     } else {
-        echo "Tidak ada file yang dipilih.";
+        
     }
 }
 ?>
