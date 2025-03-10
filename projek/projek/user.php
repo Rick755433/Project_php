@@ -73,9 +73,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       padding: 20px;
     }
     .container {
-      max-width: 600px;
+      max-width: 100%;
       margin: 0 auto;
       background: #fff;
+      background: #f4f7f6;
+      
+
       border-radius: 8px;
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
       padding: 20px;
@@ -116,6 +119,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     .settings-list a:hover {
       background: #f0f8ff;
     }
+    
+
+    .da{
+      position: relative;
+    }
+
+
+    .sa{
+   
+      position: absolute;
+      width: 100%;
+      height: 200px;
+      background-image: url(download.jpeg);
+     
+
+    }
+    .sa image{
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+     
+
+    }
+
     button{
       padding: 7px;
       font-size: 12px;
@@ -127,10 +154,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   </style>
 </head>
 <body>
+  <div class="sa">
+    
+   
+  </div>
   <div class="container">
-    <h2>Pengaturan Akun</h2>
+   <div class="da">
+   <h2>Pengaturan Akun</h2>
     <img src="<?php echo htmlspecialchars($profile); ?>" alt="Profile Picture" class="profile-img">
     <p>Selamat datang, <?php echo htmlspecialchars($username); ?>!</p>
+   </div>
 
     <form method="POST" enctype="multipart/form-data" class="settings-form">
       <label for="profile_pic">Ubah Foto Profil:</label>
