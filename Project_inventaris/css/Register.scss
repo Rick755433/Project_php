@@ -1,0 +1,173 @@
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400,700");
+
+$opensans: "Open Sans", sans-serif;
+$fw--1: 300;
+$fw--2: 400;
+$fw--3: 800;
+$blue: #72a3d4;
+$blue--2: #618bb4;
+$grey: #606060;
+
+@mixin gradient($deg) {
+  background: linear-gradient($deg, #f78fad, #fdeb82);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+span,
+a {
+  font-family: $opensans;
+}
+
+p {
+  font-weight: $fw--1;
+}
+
+a {
+  cursor: pointer;
+  font-weight: $fw--2;
+  text-decoration: none;
+  color: $blue;
+
+  &:hover {
+    color: $blue--2;
+  }
+}
+
+input[type="button"],
+input[type="checkbox"] {
+  cursor: pointer;
+}
+
+body {
+  @include gradient(30deg);
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 850px;
+  height: 550px;
+  margin: 80px auto 0;
+  display: flex;
+  justify-content: space-between;
+  background: white;
+  box-shadow: 1px 2px 10px 2px rgba(1, 1, 1, 0.4);
+
+  div[class^="register"] {
+    .card {
+      padding: 2em 3em;
+      height: 100%;
+    }
+  }
+
+  .register-left {
+    background: url("http://images6.fanpop.com/image/photos/37500000/Cherry-Blossom-japanese-cherry-tree-sakura-37503993-1366-768.jpg");
+    background-size: cover;
+    background-position: 40%;
+    width: 100%;
+    .card {
+      color: #f3f2f4;
+      display: flex;
+      flex-direction: column;
+
+      h1 {
+        margin-top: 0;
+        padding-top: 0;
+        font-size: 4.5em;
+        flex: 2;
+      }
+      p {
+        font-size: 1.2em;
+      }
+    }
+  }
+  .register-right {
+    width: 100%;
+
+    p {
+      color: $grey;
+    }
+
+    .card {
+      display: flex;
+      flex-direction: column;
+
+      div[class^="card--"] {
+        margin: 1rem 0;
+      }
+
+      &--desc {
+        h2 {
+          color: #212121;
+          padding-bottom: 1rem;
+        }
+      }
+      &--register {
+        flex: 1;
+
+        form {
+          display: flex;
+          flex-direction: column;
+
+          input {
+            border: none;
+            margin: 2px 0;
+          }
+
+          input:not([type="button"]) {
+            position: relative;
+            height: 45px;
+            padding-left: 15px;
+            border-bottom: 2px solid rgba($grey, 0.2);
+            border-radius: 8px;
+            transition: 0.5s all ease;
+
+            &:focus {
+              outline: none;
+              border-bottom: 2px solid #c32aa3;
+            }
+          }
+          .agree {
+            display: flex;
+            align-items: center;
+
+            label {
+              margin-left: 15px;
+              font-size: 0.9rem;
+            }
+          }
+
+          input[type="button"] {
+            background: #f78fad;
+            color: white;
+            font-size: 0.8rem;
+            width: 100px;
+            height: 30px;
+            border-radius: 25px;
+            align-self: flex-end;
+            font-weight: $fw--3;
+            letter-spacing: 2px;
+            &:hover {
+              background: #ef5a5c;
+            }
+          }
+        }
+      }
+    }
+  }
+}
