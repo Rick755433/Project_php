@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PROJECT</string>
+    <string name="select">select item</string>
+    <string name="title_activity_profile_sekolah">ProfileSekolah</string>
+</resources>

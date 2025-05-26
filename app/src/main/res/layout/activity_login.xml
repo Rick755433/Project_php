@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@drawable/gs"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+
+
+    android:layout_height="match_parent"
+    tools:context=".LOGIN">
+
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="30dp"
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@color/white"
+        app:cardElevation="20dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:padding="20dp"
+            android:background="@drawable/ap">
+
+            <EditText
+
+                android:textSize="23dp"
+                android:background="@drawable/as"
+                android:padding="10dp"
+                android:id="@+id/intusername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+
+
+                android:hint="username"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+
+
+                app:passwordToggleEnabled="true"
+
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="5dp"
+
+
+              >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/intpasword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="2dp"
+                    android:inputType="textPassword"
+                    android:background="@drawable/as"
+                    android:hint="Password"
+                    android:padding="13dp" />
+
+
+            </com.google.android.material.textfield.TextInputLayout>
+            <Button
+                android:textColor="@color/white"
+                android:textAlignment="center"
+                android:id="@+id/btnlogin"
+                android:text="login"
+
+                android:layout_margin="8dp"
+                android:textSize="20dp"
+                android:layout_marginTop="1dp"
+                android:background="@color/blue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+
+                android:padding="8dp"
+
+
+                />
+            <TextView
+                android:id="@+id/link"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="belum punya akun? buat akun "
+                android:textSize="15dp"
+                android:layout_margin="10dp"/>
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

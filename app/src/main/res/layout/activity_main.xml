@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="@+id/linearLayout"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                        <Button
+                            android:id="@+id/button6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ar"
+                            android:text="Button"
+                            android:textColor="@color/white"
+                            android:textSize="10dp" />
+
+                        <Button
+                            android:id="@+id/button5"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+
+                            android:layout_weight="1"
+                            android:background="@drawable/ar"
+                            android:text="jam"
+                            android:textColor="@color/white"
+                            android:textSize="10dp" />
+
+                        <Button
+                            android:id="@+id/button3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ar"
+                            android:text="Kalender"
+                            android:textColor="@color/white"
+                            android:textSize="10dp" />
+
+                        <Button
+                            android:id="@+id/button4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="3dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/ar"
+                            android:text="Jadwal Pelajaran"
+                            android:textColor="@color/white"
+                            android:textSize="7dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="270dp"
+                            android:background="@drawable/az">
+
+                            <TextView
+                                android:id="@+id/textView2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:elevation="3dp"
+                                android:text="Absenku, Absen Praktis Tanpa Ribet!"
+                                android:textColor="@color/white"
+
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/imageView2"
+                                app:layout_constraintVertical_bias="0.214"
+                                tools:ignore="MissingConstraints" />
+
+                            <TextView
+                                android:id="@+id/textView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:layout_marginTop="112dp"
+                                android:elevation="3dp"
+                                android:text="ABSENKU"
+                                android:textAlignment="center"
+                                android:textColor="@color/white"
+                                android:textSize="32dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintHorizontal_bias="0.498"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                tools:ignore="MissingConstraints" />
+
+                            <ImageView
+                                android:id="@+id/imageView2"
+                                android:layout_width="177dp"
+                                android:layout_height="128dp"
+                                android:layout_marginTop="16dp"
+                                android:elevation="2dp"
+
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintVertical_bias="0.0"
+                                app:srcCompat="@drawable/kn"
+                                tools:ignore="MissingConstraints" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="350dp"
+                        android:layout_height="125dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="120dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@drawable/wae"
+                        android:orientation="horizontal"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+
+                        <Button
+                            android:id="@+id/btns"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+
+                            android:text="LOGOUT" />
+
+                        <Button
+                            android:id="@+id/history"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="HISTORY" />
+
+                        <Button
+                            android:id="@+id/btnabsen"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:text="Presensi" />
+                    </LinearLayout>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <LinearLayout
+
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_margin="10dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="23dp"
+                        android:textColor="@color/black"
+                        android:id="@+id/nama"/>
+
+                    <TextView
+
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="6dp"
+
+
+                        android:layout_margin="5dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@drawable/ar"
+                        android:text="INFORMASI"
+                        android:textColor="@color/white"
+                        android:textSize="20dp" />
+                    <LinearLayout
+                        android:background="@drawable/ap"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_margin="10dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:background="@drawable/ap"
+                            android:layout_width="match_parent"
+                            android:textSize="15dp"
+                            android:textColor="@color/black"
+                            android:layout_height="wrap_content"
+                            android:text="INFORMASI 11/12/2024"/>
+                        <TextView
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/black"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Selamat pagi, siswa-siswi yang terhormat!
+
+Hari ini kita akan melaksanakan upacara rutin. Mohon kepada seluruh siswa untuk berdiri dengan tegap, menjaga ketertiban, dan mengikuti upacara dengan penuh rasa hormat.
+
+Terima kasih atas perhatian dan kerjasamanya. Semoga upacara ini memberikan semangat bagi kita semua."/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

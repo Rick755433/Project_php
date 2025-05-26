@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Tabel untuk menampilkan jadwal -->
+    <android.widget.TableLayout
+        android:id="@+id/tableLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:stretchColumns="*"
+        android:padding="8dp">
+
+        <!-- Header Hari -->
+        <TableRow android:background="@android:color/darker_gray">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jam"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Senin"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Selasa"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rabu"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Kamis"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Jumat"
+                android:gravity="center"
+                android:padding="8dp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+        </TableRow>
+
+        <!-- Jam Pelajaran 08:00 - 09:30 -->
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="08:00 - 09:30"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Matematika"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Fisika"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bahasa Indonesia"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Geografi"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Seni Rupa"
+                android:gravity="center"
+                android:padding="8dp" />
+        </TableRow>
+
+        <!-- Jam Pelajaran 09:30 - 11:00 -->
+        <TableRow>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="09:30 - 11:00"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Bahasa Inggris"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Kimia"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Sejarah"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pendidikan Jasmani"
+                android:gravity="center"
+                android:padding="8dp" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Musik"
+                android:gravity="center"
+                android:padding="8dp" />
+        </TableRow>
+
+        <!-- Tambahkan row untuk jam pelajaran lainnya di sini -->
+        <!-- ... -->
+
+    </android.widget.TableLayout>
+</androidx.appcompat.widget.LinearLayoutCompat>
