@@ -1,1 +1,1 @@
-yo yo MANTOOO GENG
+GO TO HELL
